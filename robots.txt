@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+# No sitemap yet; add later if you create multiple pages, e.g.:
+# Sitemap: https://aruneshmishra.github.io/sitemap.xml

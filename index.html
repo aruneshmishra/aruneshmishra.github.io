@@ -551,7 +551,7 @@
       <p class="hint" style="margin-top:0.75rem;">
         <strong>Recommendation:</strong> Use a high-resolution photo with a plain white background for best results.
         <br /><br />
-        <strong>Zoom:</strong> Use the zoom control (slider on desktop, +/- buttons on mobile) to make your face larger or smaller in the frame.
+        <strong>Zoom:</strong> Use the zoom control (slider on desktop, +/- buttons or pinch with two fingers on mobile) to make your face larger or smaller in the frame.
         <br /><br />
         <strong>Position:</strong> Use the joystick buttons or drag the photo with your mouse or finger to move your face up, down, left, and right after you adjust zoom.
         Align the <strong>top of your forehead</strong> with the upper guide bar, the <strong>bottom of your chin</strong> with the lower bar,
@@ -722,6 +722,15 @@
   let cleanBG = false, bgColor = null;
   let lastSheetDataUrl = null;
 
+  // Pinch-zoom state
+  let pinchActive = false;
+  let pinchStartDist = 0;
+  let pinchStartScale = 1;
+  let pinchCenterX = 0;
+  let pinchCenterY = 0;
+  let offXAtPinch = 0;
+  let offYAtPinch = 0;
+
   // Theme handling
   function applyThemeFromStorage() {
     const saved = localStorage.getItem('pps-theme');
@@ -765,20 +774,24 @@
     r.readAsDataURL(f);
   });
 
-  // Auto-fit
+  // Auto-fit: always start at scale 1× and center image
   function autoFitImage() {
     if (!loaded) return;
-    const sx = W / img.width;
-    const sy = H / img.height;
-    scale = Math.max(sx, sy);
+    scale = 1; // initial and minimum zoom is always 1×
+    zoomRange.min = 1;
+    zoomRange.max = 3;
+    zoomRange.step = 0.02;
     zoomRange.value = scale;
     zoomRange.disabled = false;
     if (zoomOutBtn && zoomInBtn) {
       zoomOutBtn.disabled = false;
       zoomInBtn.disabled = false;
     }
+
     const iw = img.width * scale;
     const ih = img.height * scale;
+
+    // center image in canvas
     offX = (W - iw) / 2;
     offY = (H - ih) / 2;
   }
@@ -788,7 +801,14 @@
     zoomDisplay.textContent = scale.toFixed(2).replace(/\.00$/, '') + '×';
   }
 
-  // Helper: get canvas coordinates respecting CSS scaling
+  // Helpers for touch/canvas mapping
+  function getCanvasPointFromClient(clientX, clientY) {
+    const rect = previewCanvas.getBoundingClientRect();
+    const x = (clientX - rect.left) * (W / rect.width);
+    const y = (clientY - rect.top) * (H / rect.height);
+    return { x, y };
+  }
+
   function getCanvasCoords(evt) {
     const rect = previewCanvas.getBoundingClientRect();
     let clientX, clientY;
@@ -804,18 +824,22 @@
     return { x, y };
   }
 
-  function applyZoom(newScale) {
+  function applyZoom(newScale, centerX = W / 2, centerY = H / 2, fromScale = scale, fromOffX = offX, fromOffY = offY) {
     if (!loaded) return;
-    newScale = Math.min(3, Math.max(1, newScale));
-    const cx = W / 2;
-    const cy = H / 2;
-    const px = (cx - offX) / scale;
-    const py = (cy - offY) / scale;
+    newScale = Math.min(3, Math.max(1, newScale)); // clamp 1–3
+
+    // World coords of the zoom center before zoom
+    const px = (centerX - fromOffX) / fromScale;
+    const py = (centerY - fromOffY) / fromScale;
+
     scale = newScale;
     zoomRange.value = scale;
     setZoomDisplay();
-    offX = cx - px * scale;
-    offY = cy - py * scale;
+
+    // Reposition so that the same point stays under the same screen position
+    offX = centerX - px * scale;
+    offY = centerY - py * scale;
+
     draw();
   }
 
@@ -870,31 +894,77 @@
     previewCanvas.classList.remove('dragging');
   });
 
-  // Touch drag
+  // Touch: drag + pinch-zoom
   previewCanvas.addEventListener('touchstart', e => {
     if (!loaded) return;
     e.preventDefault();
-    const pos = getCanvasCoords(e);
-    dragging = true;
-    lastX = pos.x;
-    lastY = pos.y;
-    previewCanvas.classList.add('dragging');
+
+    if (e.touches.length === 2) {
+      // Start pinch
+      pinchActive = true;
+      dragging = false;
+      previewCanvas.classList.remove('dragging');
+
+      const t1 = e.touches[0];
+      const t2 = e.touches[1];
+      const dx = t2.clientX - t1.clientX;
+      const dy = t2.clientY - t1.clientY;
+      pinchStartDist = Math.sqrt(dx * dx + dy * dy) || 1;
+      pinchStartScale = scale;
+
+      // Pinch center in canvas coords
+      const cxClient = (t1.clientX + t2.clientX) / 2;
+      const cyClient = (t1.clientY + t2.clientY) / 2;
+      const p = getCanvasPointFromClient(cxClient, cyClient);
+      pinchCenterX = p.x;
+      pinchCenterY = p.y;
+
+      offXAtPinch = offX;
+      offYAtPinch = offY;
+    } else if (e.touches.length === 1) {
+      // Single-finger drag
+      pinchActive = false;
+      const pos = getCanvasCoords(e);
+      dragging = true;
+      lastX = pos.x;
+      lastY = pos.y;
+      previewCanvas.classList.add('dragging');
+    }
   }, { passive: false });
 
   previewCanvas.addEventListener('touchmove', e => {
-    if (!dragging) return;
+    if (!loaded) return;
     e.preventDefault();
-    const pos = getCanvasCoords(e);
-    offX += pos.x - lastX;
-    offY += pos.y - lastY;
-    lastX = pos.x;
-    lastY = pos.y;
-    draw();
+
+    if (pinchActive && e.touches.length === 2) {
+      // Pinch zoom
+      const t1 = e.touches[0];
+      const t2 = e.touches[1];
+      const dx = t2.clientX - t1.clientX;
+      const dy = t2.clientY - t1.clientY;
+      const dist = Math.sqrt(dx * dx + dy * dy) || 1;
+      const factor = dist / pinchStartDist;
+      const newScale = pinchStartScale * factor;
+      applyZoom(newScale, pinchCenterX, pinchCenterY, pinchStartScale, offXAtPinch, offYAtPinch);
+    } else if (!pinchActive && e.touches.length === 1 && dragging) {
+      // Single-finger drag
+      const pos = getCanvasCoords(e);
+      offX += pos.x - lastX;
+      offY += pos.y - lastY;
+      lastX = pos.x;
+      lastY = pos.y;
+      draw();
+    }
   }, { passive: false });
 
   previewCanvas.addEventListener('touchend', e => {
-    dragging = false;
-    previewCanvas.classList.remove('dragging');
+    if (e.touches.length < 2) {
+      pinchActive = false;
+    }
+    if (e.touches.length === 0) {
+      dragging = false;
+      previewCanvas.classList.remove('dragging');
+    }
   });
 
   // Joystick nudge

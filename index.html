@@ -3,23 +3,41 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Passport Photo Sheet Generator – US Style 2×2 Photos</title>
+  <title>Passport Photo Sheet Generator – Free 2×2 US Passport Photos</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   <!-- Basic SEO -->
-  <meta name="description" content="Free passport photo sheet generator to create a 6×4 inch sheet with six 2×2 US-style passport photos. Align, zoom, adjust, and export as PNG for printing." />
-  <meta name="keywords" content="passport photo generator, US passport photo, 2x2 photo, 6x4 photo sheet, print passport photo at home, passport photo maker" />
-  <meta name="author" content="helpingfriend" />
+  <meta name="description" content="Free passport photo sheet generator to create a 6×4 inch sheet with six 2×2 US-style passport photos. Upload, align, and download a printable PNG. Your photo never leaves your device." />
+  <meta name="keywords" content="passport photo generator, US passport photo, 2x2 photo, 6x4 photo sheet, print passport photo at home, passport photo maker, free passport photo tool" />
+  <meta name="author" content="Arunesh Mishra" />
 
   <!-- Open Graph -->
-  <meta property="og:title" content="Passport Photo Sheet Generator – US Style 2×2 Photos" />
-  <meta property="og:description" content="Upload, align, and generate a printable 6×4 sheet with six 2×2 passport photos. Simple browser-based tool with optional background clean-up." />
+  <meta property="og:title" content="Passport Photo Sheet Generator – Free 2×2 US Passport Photos" />
+  <meta property="og:description" content="Create a 6×4 sheet with six 2×2 US-style passport photos directly in your browser. No upload, no tracking, free to use." />
   <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://aruneshmishra.github.io" />
 
   <!-- Twitter -->
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Passport Photo Sheet Generator – US Style 2×2 Photos" />
-  <meta name="twitter:description" content="Create a printable 6×4 sheet of six 2×2 US-style passport photos directly in your browser." />
+  <meta name="twitter:title" content="Passport Photo Sheet Generator – Free 2×2 US Passport Photos" />
+  <meta name="twitter:description" content="Generate and print US-style passport photos at home on a 6×4 sheet. Your photo stays on your device." />
+
+  <!-- Minimal JSON-LD WebApplication schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Passport Photo Sheet Generator",
+    "url": "https://aruneshmishra.github.io",
+    "applicationCategory": "PhotoEditingApplication",
+    "operatingSystem": "All",
+    "description": "Generate a 6×4 sheet with six 2×2 US-style passport photos directly in your browser. No upload or server storage.",
+    "creator": {
+      "@type": "Person",
+      "name": "Arunesh Mishra"
+    }
+  }
+  </script>
 
   <style>
     :root {
@@ -248,6 +266,27 @@
       accent-color: var(--accent);
     }
 
+    .howto {
+      margin-top: 1.5rem;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    .howto h2 {
+      font-size: 0.95rem;
+      margin: 0 0 0.25rem 0;
+      color: var(--text-main);
+    }
+
+    .howto ol {
+      margin: 0.25rem 0 0.75rem 1.1rem;
+      padding: 0;
+    }
+
+    .howto li {
+      margin-bottom: 0.25rem;
+    }
+
     .donate {
       margin-top: 1.25rem;
       text-align: right;
@@ -274,6 +313,63 @@
       font-size: 0.8rem;
       line-height: 1.45;
     }
+  
+    .step-guide {
+      position: fixed;
+      left: 0;
+      right: 0;
+      bottom: 0.5rem;
+      margin: 0 auto;
+      max-width: 480px;
+      background: rgba(15,23,42,0.9);
+      color: #e5e7eb;
+      border-radius: 999px;
+      padding: 0.4rem 0.9rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      font-size: 0.75rem;
+      z-index: 40;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 10px 25px rgba(15,23,42,0.35);
+      animation: floatUp 0.6s ease-out;
+    }
+    .step-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .step-label {
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      font-size: 0.65rem;
+      opacity: 0.8;
+    }
+    .step-text {
+      font-size: 0.8rem;
+      font-weight: 600;
+    }
+    .step-separator {
+      opacity: 0.6;
+      font-size: 0.9rem;
+    }
+    @media (min-width: 900px) {
+      .step-guide {
+        display: none;
+      }
+    }
+    @keyframes floatUp {
+      from {
+        transform: translateY(12px);
+        opacity: 0;
+      }
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
   </style>
 </head>
 <body>
@@ -283,8 +379,13 @@
   <div class="header">
     <div class="header-main">
       <h1>Passport Photo Sheet Generator</h1>
-      <p>
-        Create a printable 6×4 sheet of six US-style 2×2 passport photos directly in your browser.
+      <div style="margin-top:0.35rem; display:inline-flex; align-items:center; gap:0.4rem; font-size:0.8rem;">
+        <span style="padding:0.15rem 0.55rem; border-radius:999px; border:1px solid rgba(37,99,235,0.3); color:#2563eb; background:rgba(219,234,254,0.6);">
+          2-step · 2-click process
+        </span>
+      </div>
+      <p><strong>Create your passport photo in just two clicks.</strong><br>
+        Create a printable 6×4 sheet with six US-style 2×2 passport photos directly in your browser.
         Your photo stays safely on your device &mdash; it is not sent to any server, stored online,
         or used for any other purpose.
       </p>
@@ -294,7 +395,7 @@
         <span class="icon" id="themeIcon">🌙</span>
         <span id="themeLabel">Dark mode</span>
       </button>
-      <small style="font-size:0.75rem; color:var(--text-muted);">
+      <small style="font-size:0.75rem; color:var(--text-muted); text-align:right;">
         Your photo will not be transferred to any server or saved anywhere online.
       </small>
     </div>
@@ -304,13 +405,14 @@
     <!-- LEFT: EDITOR -->
     <div class="panel">
       <div class="panel-header">
-        <div class="panel-title">1. Upload & Align</div>
+        <div class="panel-title">Step 1: Upload & Align</div>
         <div class="badge">Editor</div>
       </div>
 
       <input id="fileInput" type="file" accept="image/*" />
 
-      <p class="hint" style="margin-top:0.75rem;"><strong>Recommendation:</strong> Use a high‑resolution photo with a plain white background for best results.<br><br>
+      <p class="hint" style="margin-top:0.75rem;">
+        <strong>Recommendation:</strong> Use a high-resolution photo with a plain white background for best results.
         Zoom & drag the image. Align the <strong>top of your forehead</strong> with the upper thin bar,
         the <strong>bottom of your chin</strong> with the lower thin bar, and place the center of your face on the big plus.
       </p>
@@ -339,7 +441,7 @@
     <!-- RIGHT: SHEET -->
     <div class="panel">
       <div class="panel-header">
-        <div class="panel-title">2. Generate 6×4 Sheet</div>
+        <div class="panel-title">Step 2: Generate 6×4 Sheet</div>
         <div class="badge">Output</div>
       </div>
 
@@ -357,8 +459,40 @@
     </div>
   </div>
 
+  <!-- Minimal How-to section (SEO but compact) -->
+  <div class="howto">
+    <h2>How to use this free US passport photo generator</h2>
+    <ol>
+      <li>Take a clear, high-resolution photo against a plain white background.</li>
+      <li>Upload the photo, then zoom and drag to align your forehead and chin with the guide bars.</li>
+      <li>Optionally clean the background to white and click <strong>Generate Sheet</strong>.</li>
+      <li>Download the PNG file and print it on 6×4 inch photo paper at 100% / actual size.</li>
+    </ol>
+
+    <h2>How to print the 6×4 passport photo sheet</h2>
+    <ol>
+      <li>Select <strong>4×6 inch</strong> paper size in your printer settings.</li>
+      <li>Turn off “Fit to page” or scaling and use <strong>Actual size</strong>.</li>
+      <li>Use photo paper and the highest quality print mode your printer supports.</li>
+      <li>Cut along the thin borders to get six 2×2 inch photos.</li>
+    </ol>
+  </div>
+
   <div class="donate">
     If this tool helps you, consider <a href="https://www.buymeacoffee.com/helpingfriend" target="_blank" rel="noopener noreferrer">supporting the creator</a>.
+  </div>
+
+
+  <div class="step-guide">
+    <div class="step-item">
+      <span class="step-label">Step 1</span>
+      <span class="step-text">Upload & Align</span>
+    </div>
+    <div class="step-separator">›</div>
+    <div class="step-item">
+      <span class="step-label">Step 2</span>
+      <span class="step-text">Generate Sheet</span>
+    </div>
   </div>
 
   <div class="disclaimer">

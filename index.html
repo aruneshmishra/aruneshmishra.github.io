@@ -549,19 +549,13 @@
       <input id="fileInput" type="file" accept="image/*" />
 
       <p class="hint" style="margin-top:0.75rem;">
-        <strong>Recommendation:</strong> Use a high-resolution photo with a plain white background for best results.
-        <br /><br />
-        <strong>Zoom:</strong> Use the zoom control (slider on desktop, +/- buttons or pinch with two fingers on mobile) to make your face larger or smaller in the frame.
-        <br /><br />
-        <strong>Position:</strong> Use the joystick buttons or drag the photo with your mouse or finger to move your face up, down, left, and right after you adjust zoom.
-        Align the <strong>top of your forehead</strong> with the upper guide bar, the <strong>bottom of your chin</strong> with the lower bar,
-        and keep your face centered on the big plus sign. These guides will <strong>not</strong> appear on the final sheet.
+        Choose a photo with a white background using the button above, then use zoom &amp; positioning controls to align the top of your forehead and bottom of your chin to the markers. These guides will not appear on the final sheet.
       </p>
 
       <div style="margin-top:0.75rem;">
         <label style="font-size:0.85rem;">
           <input type="checkbox" id="bgToggle" />
-          Clean background to white (simple color-based cleanup; for better results use a photo with a white background).
+          Clean background to white (for better results use a photo with a white background).
         </label>
       </div>
 
@@ -607,14 +601,9 @@
     <!-- RIGHT: SHEET -->
     <div class="panel" id="step2">
       <div class="panel-header">
-        <div class="panel-title">Step 2: Generate 6×4 Sheet</div>
+        <div class="panel-title">Step 2: Download 6×4 Sheet to print</div>
         <div class="badge">Output</div>
       </div>
-
-      <p class="hint">
-        Automatically generates a 6×4 inch sheet at 300 DPI (1800×1200 px) with six 2×2 inch photos and thin black cutting borders.
-        Alignment guides are only shown in the preview and are not included in the final sheet.
-      </p>
 
       <div class="btn-row">
         <button id="downloadBtn" class="btn btn-secondary" type="button" disabled>⬇️ Download PNG</button>
@@ -623,7 +612,7 @@
       <canvas id="sheetCanvas" width="1800" height="1200" style="margin-top:0.75rem;"></canvas>
 
       <div class="btn-row" style="margin-top:0.5rem;">
-        <button id="clearBtn" class="btn btn-secondary" type="button">🧹 Clear photo from tool</button>
+        <button id="clearBtn" class="btn btn-secondary" type="button">🧹 Clear photo from tool  (not required)</button>
       </div>
     </div>
   </div>
@@ -668,7 +657,7 @@
     <div class="step-separator">›</div>
     <div class="step-item" id="stepGuide2">
       <span class="step-label">Step 2</span>
-      <span class="step-text">Generate Sheet</span>
+      <span class="step-text">Download 6×4 Sheet</span>
     </div>
   </div>
 

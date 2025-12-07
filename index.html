@@ -4,155 +4,480 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Arunesh Mishra – Engineering Leader & Architect</title>
-  <meta name="description" content="Arunesh Mishra – Engineering Leader, Architect, and Builder of large-scale cloud systems. Explore projects, leadership work, and open-source tools including the Free Passport Photo Tool." />
+  <meta name="description" content="Arunesh Mishra – hands-on Engineering Leader and Architect building large-scale cloud platforms, secure APIs, and developer-focused tools such as FreePassportPhotoTool.com." />
 
   <link rel="icon" href="favicon.ico" />
 
   <!-- OpenGraph -->
   <meta property="og:title" content="Arunesh Mishra – Engineering Leader & Architect" />
-  <meta property="og:description" content="Engineering leader specializing in cloud platforms, DevOps, and large-scale distributed systems." />
+  <meta property="og:description" content="Engineering leader specializing in cloud platforms, distributed systems, and developer experience. Explore projects and tools including Free Passport Photo Tool." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://aruneshmishra.github.io" />
 
   <style>
+    :root {
+      --bg: #f7f9fc;
+      --bg-card: #ffffff;
+      --text-main: #0f172a;
+      --text-subtle: #64748b;
+      --accent: #2563eb;
+      --accent-soft: #dbeafe;
+      --border-subtle: #e2e8f0;
+      --badge-bg: #eff6ff;
+    }
+
+    body.dark {
+      --bg: #020617;
+      --bg-card: #020617;
+      --text-main: #e5e7eb;
+      --text-subtle: #94a3b8;
+      --accent: #3b82f6;
+      --accent-soft: #1d283a;
+      --border-subtle: #1e293b;
+      --badge-bg: #0f172a;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
     body {
       margin: 0;
       padding: 0;
       font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      background: #f7f9fc;
-      color: #111;
+      background: radial-gradient(circle at top, #e0f2fe 0, #f7f9fc 38%, var(--bg) 100%);
+      color: var(--text-main);
+      min-height: 100vh;
     }
 
-    .container {
-      max-width: 820px;
-      margin: auto;
-      padding: 2.5rem 1.5rem;
+    .page-shell {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 2rem 1.25rem 3rem 1.25rem;
     }
 
-    h1 {
-      font-size: 2.4rem;
-      margin-bottom: 0.25rem;
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 1rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .name-block h1 {
+      font-size: 2.2rem;
+      margin: 0 0 0.25rem 0;
       font-weight: 700;
+      letter-spacing: 0.02em;
     }
 
-    h2 {
-      margin-top: 2.2rem;
-      font-size: 1.4rem;
-      font-weight: 600;
-      border-left: 4px solid #2563eb;
-      padding-left: 0.6rem;
+    .roles {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.35rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .role-pill {
+      font-size: 0.75rem;
+      padding: 0.2rem 0.6rem;
+      border-radius: 999px;
+      border: 1px solid rgba(37,99,235,0.25);
+      color: var(--accent);
+      background: rgba(219,234,254,0.7);
+    }
+
+    body.dark .role-pill {
+      background: #020617;
+      border-color: #1d4ed8;
     }
 
     .subtitle {
-      font-size: 1.1rem;
-      color: #444;
-      margin-bottom: 1.5rem;
+      font-size: 0.95rem;
+      color: var(--text-subtle);
+      max-width: 32rem;
     }
 
-    .section {
-      margin-top: 2rem;
+    .header-actions {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 0.5rem;
+      flex-shrink: 0;
+    }
+
+    .toggle-btn {
+      border-radius: 999px;
+      padding: 0.35rem 0.9rem;
+      border: 1px solid var(--border-subtle);
+      background: rgba(255,255,255,0.9);
+      color: var(--text-main);
+      cursor: pointer;
+      font-size: 0.8rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      backdrop-filter: blur(6px);
+    }
+
+    body.dark .toggle-btn {
+      background: rgba(15,23,42,0.95);
+    }
+
+    .toggle-btn span.icon {
+      font-size: 0.95rem;
+    }
+
+    main {
+      display: grid;
+      grid-template-columns: minmax(0, 3fr) minmax(0, 2.2fr);
+      gap: 1.5rem;
+    }
+
+    @media (max-width: 800px) {
+      main {
+        grid-template-columns: 1fr;
+      }
+      header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .header-actions {
+        align-items: flex-start;
+      }
+    }
+
+    .card {
+      background: var(--bg-card);
+      border-radius: 0.85rem;
+      border: 1px solid var(--border-subtle);
+      padding: 1.2rem 1.2rem 1.1rem 1.2rem;
+      margin-bottom: 1rem;
+      box-shadow: 0 18px 40px rgba(15,23,42,0.08);
+    }
+
+    body.dark .card {
+      box-shadow: 0 16px 36px rgba(0,0,0,0.65);
+    }
+
+    h2 {
+      margin: 0 0 0.75rem 0;
+      font-size: 1.1rem;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    h2 span.dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      background: var(--accent);
+      display: inline-block;
     }
 
     p {
-      line-height: 1.55;
-      font-size: 1rem;
-      margin-bottom: 1rem;
+      line-height: 1.6;
+      font-size: 0.95rem;
+      margin: 0 0 0.75rem 0;
+      color: var(--text-main);
     }
 
-    .links {
-      margin-top: 1.2rem;
+    .text-subtle {
+      color: var(--text-subtle);
+    }
+
+    .links-row {
       display: flex;
-      gap: 0.8rem;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      margin-top: 0.9rem;
     }
 
     a.button {
       text-decoration: none;
-      padding: 0.55rem 1rem;
-      border-radius: 6px;
-      background: #2563eb;
+      padding: 0.5rem 0.95rem;
+      border-radius: 999px;
+      background: var(--accent);
       color: white;
-      font-size: 0.95rem;
-      transition: background 0.2s ease;
+      font-size: 0.9rem;
+      transition: background 0.15s ease, transform 0.1s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+
+    a.button.secondary {
+      background: transparent;
+      color: var(--text-main);
+      border: 1px solid var(--border-subtle);
     }
 
     a.button:hover {
-      background: #174bc6;
+      background: #1d4ed8;
+      transform: translateY(-1px);
+    }
+
+    a.button.secondary:hover {
+      background: var(--accent-soft);
+    }
+
+    body.dark a.button.secondary:hover {
+      background: #020617;
+    }
+
+    .tag-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.35rem;
+      margin-top: 0.35rem;
+    }
+
+    .tag {
+      font-size: 0.75rem;
+      padding: 0.18rem 0.6rem;
+      border-radius: 999px;
+      background: var(--badge-bg);
+      color: var(--text-subtle);
+    }
+
+    .highlight-list {
+      list-style: none;
+      padding-left: 0;
+      margin: 0;
+    }
+
+    .highlight-list li {
+      margin-bottom: 0.55rem;
+      font-size: 0.9rem;
+      color: var(--text-main);
+    }
+
+    .highlight-list li span.label {
+      font-weight: 600;
     }
 
     .project {
-      border: 1px solid #e2e8f0;
-      padding: 1.2rem;
-      border-radius: 8px;
-      margin-top: 1rem;
-      background: #fff;
+      border-radius: 0.75rem;
+      border: 1px solid var(--border-subtle);
+      padding: 0.9rem 0.9rem 0.85rem 0.9rem;
+      margin-top: 0.6rem;
+      background: radial-gradient(circle at top left, #eff6ff 0, var(--bg-card) 42%);
+    }
+
+    body.dark .project {
+      background: radial-gradient(circle at top left, #020617 0, #020617 45%, #020617 100%);
     }
 
     .project-title {
-      font-size: 1.1rem;
+      font-size: 1rem;
       font-weight: 600;
-      margin-bottom: 0.4rem;
+      margin-bottom: 0.2rem;
     }
 
-    .footer {
+    .project-meta {
+      font-size: 0.8rem;
+      color: var(--text-subtle);
+      margin-bottom: 0.45rem;
+    }
+
+    footer {
       text-align: center;
-      padding: 2rem 0;
-      font-size: 0.9rem;
-      color: #666;
+      padding: 1.8rem 0 0.5rem 0;
+      font-size: 0.8rem;
+      color: var(--text-subtle);
     }
   </style>
 </head>
 
 <body>
-  <div class="container">
+  <div class="page-shell">
+    <header>
+      <div class="name-block">
+        <h1>Arunesh Mishra</h1>
+        <div class="roles">
+          <span class="role-pill">Engineering Leader</span>
+          <span class="role-pill">Architect</span>
+          <span class="role-pill">Builder</span>
+        </div>
+        <p class="subtitle">
+          I lead teams that build reliable, secure, cloud-native systems — with a strong focus on developer
+          experience, automation, and shipping solutions that actually get used.
+        </p>
+      </div>
 
-    <h1>Arunesh Mishra</h1>
-    <div class="subtitle">Engineering Leader • Architect • Builder</div>
+      <div class="header-actions">
+        <button id="themeToggle" class="toggle-btn" type="button">
+          <span class="icon" id="themeIcon">🌙</span>
+          <span id="themeLabel">Dark mode</span>
+        </button>
+        <div style="font-size:0.75rem; color:var(--text-subtle); text-align:right; max-width:12rem;">
+          Best viewed on a modern browser. No tracking, no popups.
+        </div>
+      </div>
+    </header>
 
-    <p>
-      I’m a hands-on engineering leader with deep experience designing and delivering
-      large-scale cloud applications, distributed systems, secure API platforms, and intelligent automation.
-      I specialize in simplifying complex systems, leading high-performing engineering teams,
-      and building solutions that directly improve business outcomes.
-    </p>
+    <main>
+      <!-- LEFT COLUMN -->
+      <section>
+        <div class="card">
+          <h2><span class="dot"></span> About</h2>
+          <p>
+            I am a hands-on engineering leader with experience designing and delivering
+            large-scale cloud applications, distributed systems, secure API platforms,
+            and automation across the software lifecycle.
+          </p>
+          <p class="text-subtle">
+            I enjoy taking ambiguous, hard problems — scaling, reliability, developer productivity —
+            and turning them into clear architectures, working software, and healthy teams.
+          </p>
 
-    <div class="links">
-      <a class="button" href="https://www.linkedin.com/in/aruneshmishra" target="_blank">LinkedIn</a>
-      <a class="button" href="https://github.com/aruneshmishra" target="_blank">GitHub</a>
-      <a class="button" href="https://freepassportphototool.com" target="_blank">Passport Photo Tool</a>
-    </div>
+          <div class="links-row">
+            <a class="button" href="https://www.linkedin.com/in/aruneshmishra" target="_blank" rel="noopener noreferrer">
+              <span>LinkedIn</span>
+            </a>
+            <a class="button secondary" href="https://github.com/aruneshmishra" target="_blank" rel="noopener noreferrer">
+              GitHub
+            </a>
+            <a class="button secondary" href="https://freepassportphototool.com" target="_blank" rel="noopener noreferrer">
+              Free Passport Photo Tool
+            </a>
+          </div>
+        </div>
 
-    <h2>Featured Project</h2>
+        <div class="card">
+          <h2><span class="dot"></span> Highlights</h2>
+          <ul class="highlight-list">
+            <li>
+              <span class="label">Cloud & Scale:</span>
+              Designed and led delivery of Azure-based platforms and integration-heavy systems supporting
+              thousands of global users and complex workflows.
+            </li>
+            <li>
+              <span class="label">Engineering Leadership:</span>
+              Built and guided multi-disciplinary teams (engineering, QA, DevOps, data) with a focus on
+              clear ownership, sustainable delivery, and mentoring.
+            </li>
+            <li>
+              <span class="label">DevOps & Automation:</span>
+              Drove CI/CD, environment automation, and secure-by-default practices across multiple applications,
+              making releases faster and more predictable.
+            </li>
+            <li>
+              <span class="label">Developer Experience:</span>
+              Invested in internal tools, shared libraries, and patterns that make it easier and safer
+              for teams to build and ship features.
+            </li>
+          </ul>
+        </div>
+      </section>
 
-    <div class="project">
-      <div class="project-title">Free Passport Photo Tool</div>
-      <p>
-        A privacy-first, fully in-browser US passport photo generator.  
-        No uploads, no servers — all processing happens locally.
-        Generates a 6×4 sheet with six 2×2 photos ready for printing.
-      </p>
-      <a class="button" href="https://freepassportphototool.com" target="_blank">Try the Tool</a>
-    </div>
+      <!-- RIGHT COLUMN -->
+      <section>
+        <div class="card">
+          <h2><span class="dot"></span> Focus Areas</h2>
+          <p class="text-subtle" style="margin-bottom:0.45rem;">
+            Areas where I’m most effective and enjoy contributing:
+          </p>
+          <div class="tag-list">
+            <span class="tag">Cloud Architecture</span>
+            <span class="tag">Distributed Systems</span>
+            <span class="tag">API & Integration</span>
+            <span class="tag">DevOps / CI-CD</span>
+            <span class="tag">Engineering Management</span>
+            <span class="tag">Developer Experience</span>
+          </div>
+        </div>
 
-    <h2>What I Do</h2>
+        <div class="card">
+          <h2><span class="dot"></span> Selected Work</h2>
 
-    <p>
-      • Lead engineering teams through complex delivery  
-      • Architect scalable API & microservice ecosystems  
-      • Build automation for DevOps, CI/CD, and environments  
-      • Apply cloud-native patterns across Azure platforms  
-      • Drive engineering culture, mentorship, and delivery excellence  
-    </p>
+          <div class="project">
+            <div class="project-title">Free Passport Photo Tool</div>
+            <div class="project-meta">
+              <span>freepassportphototool.com · 2025</span>
+            </div>
+            <p>
+              A privacy-first, fully in-browser US passport photo generator.
+              No uploads or servers — all processing happens locally in the browser.
+              Automatically lays out six 2×2 photos on a 6×4 sheet ready for printing.
+            </p>
+            <div class="tag-list">
+              <span class="tag">JavaScript</span>
+              <span class="tag">Canvas</span>
+              <span class="tag">Client-side only</span>
+              <span class="tag">User-focused UX</span>
+            </div>
+            <div class="links-row" style="margin-top:0.6rem;">
+              <a class="button secondary" href="https://freepassportphototool.com" target="_blank" rel="noopener noreferrer">
+                Try the tool
+              </a>
+            </div>
+          </div>
 
-    <h2>Contact</h2>
+          <!-- Reserved space for future projects -->
+          <div class="project" style="margin-top:0.8rem; opacity:0.92;">
+            <div class="project-title">More projects coming soon</div>
+            <p class="text-subtle">
+              I’ll use this space to highlight more architecture work, internal tools, and open-source experiments
+              as I publish them.
+            </p>
+          </div>
+        </div>
 
-    <p>
-      You can reach me via LinkedIn or explore more of my work on GitHub.
-      This site highlights my personal projects, tools, and leadership experience.
-    </p>
+        <div class="card">
+          <h2><span class="dot"></span> Contact</h2>
+          <p>
+            The best way to reach me is through
+            <a href="https://www.linkedin.com/in/aruneshmishra" target="_blank" rel="noopener noreferrer">LinkedIn</a>.
+            I’m open to conversations about engineering leadership roles, architecture problems,
+            or interesting tools that make developers’ lives easier.
+          </p>
+        </div>
+      </section>
+    </main>
 
-    <div class="footer">
-      © 2025 Arunesh Mishra — Built with simplicity and intent.
-    </div>
+    <footer>
+      © <span id="year"></span> Arunesh Mishra · Built on GitHub Pages
+    </footer>
   </div>
+
+  <script>
+    // Dynamic year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Theme persistence
+    const themeToggle = document.getElementById('themeToggle');
+    const themeIcon = document.getElementById('themeIcon');
+    const themeLabel = document.getElementById('themeLabel');
+
+    function applyTheme(mode) {
+      if (mode === 'dark') {
+        document.body.classList.add('dark');
+        themeIcon.textContent = '☀️';
+        themeLabel.textContent = 'Light mode';
+      } else {
+        document.body.classList.remove('dark');
+        themeIcon.textContent = '🌙';
+        themeLabel.textContent = 'Dark mode';
+      }
+    }
+
+    const storedTheme = localStorage.getItem('am-theme');
+    if (storedTheme) {
+      applyTheme(storedTheme);
+    } else {
+      // default: light
+      applyTheme('light');
+    }
+
+    themeToggle.addEventListener('click', () => {
+      const isDark = document.body.classList.toggle('dark');
+      const mode = isDark ? 'dark' : 'light';
+      localStorage.setItem('am-theme', mode);
+      applyTheme(mode);
+    });
+  </script>
 </body>
 </html>
